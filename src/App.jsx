@@ -177,7 +177,6 @@ export default function App() {
 
       {/* HEADER */}
       <h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
-      <h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
 
       {/* TOGGLE SWITCH */}
       <div className="flex justify-center mt-4 mb-6">
