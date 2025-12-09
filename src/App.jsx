@@ -162,7 +162,7 @@ const data_balance = [
     status: "ยังไม่หมด",
   },
   {
-    total: 23600,
+    total: 49900,
     name: "จุฑาทิพย์ ปร.", 
     account_number: "128-2-96541-7", 
     bank: " กสิกรไทย", 
