@@ -168,7 +168,7 @@ function getStatusColor(status) {
 }
 
 export default function App() {
-  const [mode, setMode] = useState("status"); // "status" | "balance"
+  const [mode, setMode] = useState("balance"); // "status" | "balance"
 
   const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
@@ -209,41 +209,41 @@ export default function App() {
 
       {/* MODE DISPLAY */}
       {mode === "balance" && (
-  <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    {data_balance.map((item, index) => (
-      <div
-        key={index}
-        className="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
-      >
-        
-        <div className="grid grid-cols-1 gap-2 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {data_balance.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
+            >
+              
+              <div className="grid grid-cols-1 gap-2 w-full">
 
-          {/* STATUS */}
-          <span
-            className={`w-full px-2 py-1 text-xs font-semibold rounded-full border text-center ${getStatusColor(
-              item.status
-            )}`}
-          >
-            {item.status}
-          </span>
+                {/* STATUS */}
+                <span
+                  className={`w-full px-2 py-1 text-xs font-semibold rounded-full border text-center ${getStatusColor(
+                    item.status
+                  )}`}
+                >
+                  {item.status}
+                </span>
 
-          {/* AMOUNT */}
-          <div className="text-purple-600 font-bold text-lg text-center">
-            {item.total.toLocaleString()} ฿
-          </div>
+                {/* AMOUNT */}
+                <div className="text-purple-600 font-bold text-lg text-center">
+                  {item.total.toLocaleString()} ฿
+                </div>
 
-          {/* NAME */}
-          <div className="text-gray-800 font-medium truncate text-center">
-            {item.name}
-          </div>
+                {/* NAME */}
+                <div className="text-gray-800 font-medium truncate text-center">
+                  {item.name}
+                </div>
 
+              </div>
+
+
+            </div>
+          ))}
         </div>
-
-
-      </div>
-    ))}
-  </div>
-)}
+      )}
 
 
 
