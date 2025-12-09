@@ -90,29 +90,45 @@ const data = [
 
 const data_balance = [
   {
-    total: 8510,
+    total: 23510,
     name: "วิชุดา วง.", 
-    status: "ยังไม่หมด"
+    status: "ยังไม่หมด",
+    paid: [
+      { date: "2 ธันวาคม 2568", paid: 15000 },
+    ],
   },
   {
-    total: 18900,
+    total: 33900,
     name: "อริสรา ยุ.", 
-    status: "ยังไม่หมด"
+    status: "ยังไม่หมด",
+    paid: [
+      { date: "2 ธันวาคม 2568", paid: 15000 },
+    ],
   },
   {
-    total: 28650,
+    total: 43650,
     name: "กมลวรรณ ใจ.", 
-    status: "ยังไม่หมด"
+    status: "ยังไม่หมด",
+    paid: [
+      { date: "2 ธันวาคม 2568", paid: 15000 },
+    ],
   },
   {
-    total: 14400,
+    total: 29400,
     name: "จินต์จุฑา พฤ.", 
-    status: "ยังไม่หมด"
+    status: "ยังไม่หมด",
+    paid: [
+      { date: "2 ธันวาคม 2568", paid: 15000 },
+    ],
   },
   {
-    total: 41600,
+    total: 46600,
     name: "กิตติพงษ์ จัน.", 
-    status: "ยังไม่หมด"
+    status: "ยังไม่หมด",
+    paid: [
+      { date: "2 ธันวาคม 2568", paid: 4500 },
+      { date: "2 ธันวาคม 2568", paid: 500 },
+    ],
   },
   {
     total: 45323,
@@ -210,46 +226,48 @@ export default function App() {
       {/* MODE DISPLAY */}
       {mode === "balance" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data_balance.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
-            >
-              <div className="flex items-center gap-2 w-full">
+          {data_balance.map((item, index) => {
+            const totalPaid = item.paid ? item.paid.reduce((sum, p) => sum + p.paid, 0) : 0;
+            const remaining = item.total - totalPaid;
 
-                {/* INDEX */}
-                <span className="text-xl font-bold text-purple-500 w-6 text-center">
-                  {index + 1}
-                </span>
+            return (
+              <div
+                key={index}
+                className="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
+              >
+                <div className="flex items-center gap-2 w-full">
 
-                {/* NAME + STATUS (flex zone) */}
-                <div className="flex items-center gap-2 flex-1 min-w-0">
-
-                  {/* NAME */}
-                  <span className="text-gray-800 font-medium truncate">
-                    {item.name}
+                  {/* INDEX */}
+                  <span className="text-xl font-bold text-purple-500 w-6 text-center">
+                    {index + 1}
                   </span>
 
-                  {/* STATUS */}
-                  <span
-                    className={`px-2 py-0.5 text-xs font-semibold rounded-full border shrink-0 ${getStatusColor(
-                      item.status
-                    )}`}
-                  >
-                    {item.status}
-                  </span>
-                </div>
+                  {/* NAME + STATUS */}
+                  <div className="flex flex-col flex-1 min-w-0 gap-1">
+                    <span className="text-gray-800 font-medium truncate">{item.name}</span>
+                    <span
+                      className={`px-2 py-0.5 text-xs font-semibold rounded-full border w-max ${getStatusColor(
+                        item.status
+                      )}`}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
 
-                {/* AMOUNT */}
-                <div className="text-purple-600 font-bold text-lg whitespace-nowrap">
-                  {item.total.toLocaleString()} ฿
-                </div>
+                  {/* AMOUNT */}
+                  <div className="flex flex-col items-end text-right whitespace-nowrap">
+                    <span className="text-gray-400 text-xs">เต็ม: {item.total.toLocaleString()} ฿</span>
+                    <span className="text-purple-600 font-bold text-lg">เหลือ: {remaining.toLocaleString()} ฿</span>
+                    <span className="text-gray-500 text-sm">จ่ายแล้ว: {totalPaid.toLocaleString()} ฿</span>
+                  </div>
 
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
+
       
       {mode === "current" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
