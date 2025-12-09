@@ -2,88 +2,88 @@ import React, { useState } from "react";
 
 const data = [
   {
-    date: "01/11/68",
+    date: "1 พฤศจิกายน 2568",
     total: 5000,
     records: [
       { name: "กิตติพงษ์ จัน.", amount: 5000, status: "โอนแล้ว" },
     ],
   },
   {
-    date: "01/12/68",
+    date: "1 ธันวาคม 2568",
     total: 5000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 5000, status: "ยังไม่หมด" },
+      { name: "กิตติพงษ์ จัน.", amount: 5000, status: "รอ" },
     ],
   },
   {
-    date: "01/01/69",
+    date: "1 มกราคม 2569",
     total: 15000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "ลัทธวรรณ อินทร์.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "กิตติพงษ์ จัน.", amount: 5000, status: "รอ" },
+      { name: "ลัทธวรรณ อินทร์.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/02/69",
+    date: "1 กุมภาพันธ์ 2569",
     total: 15000,
     records: [
-      { name: "ลัทธวรรณ อินทร์.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "จุฑารัตน์ ทิพ.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "ลัทธวรรณ อินทร์.", amount: 5000, status: "รอ" },
+      { name: "จุฑารัตน์ ทิพ.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/03/69",
+    date: "1 มีนาคม 2569",
     total: 15000,
     records: [
-      { name: "จุฑารัตน์ ทิพ.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "สรารัตน์ นน.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "จุฑารัตน์ ทิพ.", amount: 5000, status: "รอ" },
+      { name: "สรารัตน์ นน.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/04/69",
+    date: "1 เมษายน 2569",
     total: 15000,
     records: [
-      { name: "สรารัตน์ นน.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "จุฑาทิพย์ ปร.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "สรารัตน์ นน.", amount: 5000, status: "รอ" },
+      { name: "จุฑาทิพย์ ปร.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/05/69",
+    date: "1 พฤษภาคม 2569",
     total: 15000,
     records: [
-      { name: "จุฑาทิพย์ ปร.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "อภิญญา มูล.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "จุฑาทิพย์ ปร.", amount: 5000, status: "รอ" },
+      { name: "อภิญญา มูล.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/05/69",
+    date: "1 มิถุนายน 2569",
     total: 15000,
     records: [
-      { name: "อภิญญา มูล.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "อารีรักษ์ นพ.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "อภิญญา มูล.", amount: 5000, status: "รอ" },
+      { name: "อารีรักษ์ นพ.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/06/69",
+    date: "1 กรกฎาคม 2569",
     total: 15000,
     records: [
-      { name: "อารีรักษ์ นพ.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "สุภารัตน์ สง.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "อารีรักษ์ นพ.", amount: 5000, status: "รอ" },
+      { name: "สุภารัตน์ สง.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/07/69",
+    date: "1 สิงหาคม 2569",
     total: 15000,
     records: [
-      { name: "สุภารัตน์ สง.", amount: 5000, status: "ยังไม่หมด" },
-      { name: "เศรษฐวัฒน์ ศรี.", amount: 10000, status: "ยังไม่หมด" },
+      { name: "สุภารัตน์ สง.", amount: 5000, status: "รอ" },
+      { name: "เศรษฐวัฒน์ ศรี.", amount: 10000, status: "รอ" },
     ],
   },
   {
-    date: "01/07/69",
+    date: "1 กันยายน 2569",
     total: 15000,
     records: [
-      { name: "เศรษฐวัฒน์ ศรี.", amount: 5000, status: "ยังไม่หมด" },
+      { name: "เศรษฐวัฒน์ ศรี.", amount: 5000, status: "รอ" },
     ],
   },
 ];
@@ -160,7 +160,7 @@ function getStatusColor(status) {
   switch (status) {
     case "โอนแล้ว":
       return "bg-green-100 text-green-700 border-green-300";
-    case "ยังไม่หมด":
+    case "รอ":
       return "bg-yellow-100 text-yellow-700 border-yellow-300 animate-soft-blink";
     default:
       return "bg-red-100 text-red-700 border-red-300";
@@ -173,9 +173,10 @@ export default function App() {
   const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-4">
 
       {/* HEADER */}
+      <h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
       <h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
 
       {/* TOGGLE SWITCH */}
@@ -209,37 +210,43 @@ export default function App() {
 
       {/* MODE DISPLAY */}
       {mode === "balance" && (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data_balance.map((item, index) => (
             <div
               key={index}
               className="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
             >
-              
-              <div className="grid grid-cols-1 gap-2 w-full">
+              <div className="flex items-center gap-2 w-full">
 
-                {/* STATUS */}
-                <span
-                  className={`w-full px-2 py-1 text-xs font-semibold rounded-full border text-center ${getStatusColor(
-                    item.status
-                  )}`}
-                >
-                  {item.status}
+                {/* INDEX */}
+                <span className="text-xl font-bold text-purple-500 w-6 text-center">
+                  {index + 1}
                 </span>
 
+                {/* NAME + STATUS (flex zone) */}
+                <div className="flex items-center gap-2 flex-1 min-w-0">
+
+                  {/* NAME */}
+                  <span className="text-gray-800 font-medium truncate">
+                    {item.name}
+                  </span>
+
+                  {/* STATUS */}
+                  <span
+                    className={`px-2 py-0.5 text-xs font-semibold rounded-full border shrink-0 ${getStatusColor(
+                      item.status
+                    )}`}
+                  >
+                    {item.status}
+                  </span>
+                </div>
+
                 {/* AMOUNT */}
-                <div className="text-purple-600 font-bold text-lg text-center">
+                <div className="text-purple-600 font-bold text-lg whitespace-nowrap">
                   {item.total.toLocaleString()} ฿
                 </div>
 
-                {/* NAME */}
-                <div className="text-gray-800 font-medium truncate text-center">
-                  {item.name}
-                </div>
-
               </div>
-
-
             </div>
           ))}
         </div>
