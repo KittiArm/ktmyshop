@@ -168,7 +168,7 @@ function getStatusColor(status) {
 }
 
 export default function App() {
-  const [mode, setMode] = useState("balance"); // "status" | "balance"
+  const [mode, setMode] = useState("current");
 
   const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
