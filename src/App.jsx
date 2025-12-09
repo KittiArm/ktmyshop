@@ -173,7 +173,7 @@ export default function App() {
   const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen p-6">
 
       {/* HEADER */}
       <h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
@@ -244,9 +244,7 @@ export default function App() {
           ))}
         </div>
       )}
-
-
-
+      
       {mode === "current" && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.map((item, index) => (
