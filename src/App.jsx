@@ -92,6 +92,8 @@ const data_balance = [
   {
     total: 23510,
     name: "วิชุดา วง.", 
+    account_number: "020-2-00658-142", 
+    bank: "ออมสิน", 
     status: "ยังไม่หมด",
     paid: [
       { date: "2 ธันวาคม 2568", paid: 15000 },
@@ -100,6 +102,8 @@ const data_balance = [
   {
     total: 33900,
     name: "อริสรา ยุ.", 
+    account_number: "119-8-31376-5", 
+    bank: "กสิกรไทย", 
     status: "ยังไม่หมด",
     paid: [
       { date: "2 ธันวาคม 2568", paid: 15000 },
@@ -108,6 +112,8 @@ const data_balance = [
   {
     total: 43650,
     name: "กมลวรรณ ใจ.", 
+    account_number: "052-8-44817-8", 
+    bank: "กสิกรไทย", 
     status: "ยังไม่หมด",
     paid: [
       { date: "2 ธันวาคม 2568", paid: 15000 },
@@ -116,6 +122,8 @@ const data_balance = [
   {
     total: 29400,
     name: "จินต์จุฑา พฤ.", 
+    account_number: "035-8-93153-7", 
+    bank: "กสิกรไทย", 
     status: "ยังไม่หมด",
     paid: [
       { date: "2 ธันวาคม 2568", paid: 15000 },
@@ -124,6 +132,8 @@ const data_balance = [
   {
     total: 46600,
     name: "กิตติพงษ์ จัน.", 
+    account_number: "130-1-25954-5", 
+    bank: "กสิกรไทย", 
     status: "ยังไม่หมด",
     paid: [
       { date: "2 ธันวาคม 2568", paid: 4500 },
@@ -132,43 +142,59 @@ const data_balance = [
   },
   {
     total: 45323,
-    name: "ลัทธวรรณ อินทร์.",
-    status: "ยังไม่หมด"
+    name: "ลัทธวรรณ อินทร์.", 
+    account_number: "015-1-74718-3", 
+    bank: "กสิกรไทย", 
+    status: "ยังไม่หมด",
   },
   {
     total: 23600,
     name: "จุฑารัตน์ ทิพ.", 
-    status: "ยังไม่หมด"
+    account_number: "408-5-51874-7", 
+    bank: "ไทยพาณิชย์", 
+    status: "ยังไม่หมด",
   },
   {
     total: 24956,
     name: "สรารัตน์ นน.", 
-    status: "ยังไม่หมด"
+    account_number: "085-2-86836-8", 
+    bank: "กสิกรไทย", 
+    status: "ยังไม่หมด",
   },
   {
     total: 23600,
     name: "จุฑาทิพย์ ปร.", 
-    status: "ยังไม่หมด"
+    account_number: "128-2-96541-7", 
+    bank: " กสิกรไทย", 
+    status: "ยังไม่หมด",
   },
   {
     total: 31900,
     name: "อภิญญา มูล.", 
-    status: "ยังไม่หมด"
+    account_number: "071-8-73687-0", 
+    bank: "กสิกรไทย", 
+    status: "ยังไม่หมด",
   },
   {
     total: 43080,
     name: "อารีรักษ์ นพ.", 
-    status: "ยังไม่หมด"
+    account_number: "283-2-12830-1", 
+    bank: "ไทยพาณิชย์", 
+    status: "ยังไม่หมด",
   },
   {
     total: 34450,
-    name: "สุภารัตน์ สง.", 
-    status: "ยังไม่หมด"
+    name: "ศุภรัตน์ สง.", 
+    account_number: "985-9-95239-6", 
+    bank: "กรุงไทย", 
+    status: "ยังไม่หมด",
   },
   {
     total: 37587,
     name: "เศรษฐวัฒน์ ศรี.", 
-    status: "ยังไม่หมด"
+    account_number: "065-1-47622-4", 
+    bank: "กสิกรไทย", 
+    status: "ยังไม่หมด",
   },
 ];
 
@@ -233,12 +259,12 @@ export default function App() {
             return (
               <div
                 key={index}
-                className="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
+                className="bg-white p-4 rounded-xl shadow-md border-l-4 border-purple-500 hover:shadow-lg transition"
               >
                 <div className="flex items-center gap-2 w-full">
 
                   {/* INDEX */}
-                  <span className="text-xl font-bold text-purple-500 w-6 text-center">
+                  <span className="text-xl font-bold text-purple-500 w-6 text-center pr-3">
                     {index + 1}
                   </span>
 
@@ -261,6 +287,9 @@ export default function App() {
                     <span className="text-gray-500 text-sm">จ่ายแล้ว: {totalPaid.toLocaleString()} ฿</span>
                   </div>
 
+                </div>
+                <div className="text-center mt-1">
+                    <span className="text-gray-400 text-xs">บัญชี: {item.account_number} / {item.bank}</span>
                 </div>
               </div>
             );
