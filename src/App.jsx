@@ -139,6 +139,7 @@ const data_balance = [
     paid: [
       { date: "2 ธันวาคม 2568", paid: 4500 },
       { date: "2 ธันวาคม 2568", paid: 500 },
+      { date: "31 มกราคม 256ต", paid: 500 },
     ],
   },
   {
