@@ -12,7 +12,8 @@ const data = [
     date: "1 ธันวาคม 2568",
     total: 5000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 5000, status: "รอ" },
+      { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
+      { name: "กิตติพงษ์ จัน.", amount: 4500, status: "รอ" },
     ],
   },
   {
