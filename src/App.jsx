@@ -367,7 +367,7 @@ export default function App() {
               <div className="space-y-2">
                 {item.records.map((rec, i) => (
                   <div key={i} className="bg-gray-50 p-3 rounded-lg flex flex-col">
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center mb-1">
                       <span className="text-gray-800 text-xs">{rec.date}</span>
                     </div>
                     <div className="flex justify-between items-center">
