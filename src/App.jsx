@@ -2123,7 +2123,7 @@ export default function App() {
 
 	return (
 		<div className="min-h-screen p-4">
-			<h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
+			<h1 className="text-2xl font-bold text-center">รอรับเงินคืน</h1>
 
 			<div className="flex justify-center mt-4 mb-2">
 				<div
