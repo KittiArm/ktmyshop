@@ -2192,7 +2192,7 @@ export default function App() {
 				</div>
 			</div>
 
-			<div className="bg-white p-2 rounded-xl shadow-md hover:shadow-lg transition">
+			<div className="px-4 rounded-xl shadow-md hover:shadow-lg transition">
 			    <EnergyProgressBar
 				      paid={progress.paid}
 				      total={progress.total}
