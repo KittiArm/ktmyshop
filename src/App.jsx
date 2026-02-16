@@ -2099,47 +2099,47 @@ const data_balance = [
 	},
 ];
 
-const calculateBalanceProgress = () => {
-	let grandTotal = 0;
-	let grandPaid = 0;
+const calculateProgress = () => {
+  let paid = 0;
+  let total = 0;
 
-	data_balance.forEach((person) => {
-		grandTotal += person.total;
+  data.forEach((month) => {
+    total += month.total;
 
-		if (person.paid && Array.isArray(person.paid)) {
-			person.paid.forEach((p) => {
-				grandPaid += p.paid;
-			});
-		}
-	});
+    month.records.forEach((rec) => {
+      if (rec.status === "โอนแล้ว") {
+        paid += rec.amount;
+      }
+    });
+  });
 
-	return {
-		grandTotal,
-		grandPaid,
-		percent: grandTotal > 0 ? Math.round((grandPaid / grandTotal) * 100) : 0,
-	};
+  return {
+    paid,
+    total,
+    percent: total > 0 ? Math.round((paid / total) * 100) : 0,
+  };
 };
 
-const EnergyProgressBar = ({ grandPaid, grandTotal, percent }) => {
-	return (
-		<div className="w-full mb-6 p-4 rounded-2xl bg-white shadow">
-			<div className="flex justify-between text-sm font-semibold mb-2">
-				<span>💰 Progress การจ่ายทั้งหมด</span>
-				<span>{percent}%</span>
-			</div>
+const EnergyProgressBar = ({ paid, total, percent }) => {
+  return (
+    <div className="w-full mb-4">
+      <div className="flex justify-between text-sm font-medium mb-1">
+        <span>การคืนเงิน</span>
+        <span>{percent}%</span>
+      </div>
 
-			<div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-				<div
-					className="bg-green-500 h-4 rounded-full transition-all duration-500"
-					style={{ width: `${percent}%` }}
-				/>
-			</div>
+      <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+        <div
+          className="bg-green-500 h-4 rounded-full transition-all duration-500"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
 
-			<p className="text-xs text-gray-500 mt-2">
-				จ่ายแล้ว {grandPaid.toLocaleString()} / {grandTotal.toLocaleString()} บาท
-			</p>
-		</div>
-	);
+      <p className="text-xs text-gray-500 mt-1">
+        คืนแล้ว {paid.toLocaleString()} / {total.toLocaleString()} บาท
+      </p>
+    </div>
+  );
 };
 
 function getStatusColor(status) {
@@ -2198,7 +2198,7 @@ export default function App() {
 
 	const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
-    const progress = calculateBalanceProgress();
+	const progress = calculateProgress();
 
 	return (
 		<div className="min-h-screen p-4">
@@ -2227,11 +2227,11 @@ export default function App() {
 			</div>
 
 			<div className="px-4">
-				<EnergyProgressBar
-					paid={progress.paid}
-					total={progress.total}
-					percent={progress.percent}
-				/>
+			    <EnergyProgressBar
+				      paid={progress.paid}
+				      total={progress.total}
+				      percent={progress.percent}
+			    />
 			</div>
 
 			{/* MODE DISPLAY */}
