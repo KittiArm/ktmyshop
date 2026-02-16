@@ -344,17 +344,6 @@ function getStatusColor(status) {
   }
 }
 
-function getStatusColor(status) {
-  switch (status) {
-    case "โอนแล้ว":
-      return "bg-green-100 text-green-700 border-green-300";
-    case "รอ":
-      return "bg-yellow-100 text-yellow-700 border-yellow-300";
-    default:
-      return "bg-gray-100 text-gray-700 border-gray-300";
-  }
-}
-
 export default function App() {
   const [mode, setMode] = useState("current");
 
