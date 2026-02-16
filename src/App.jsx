@@ -369,7 +369,6 @@ export default function App() {
                   <div key={i} className="bg-gray-50 p-3 rounded-lg flex flex-col">
 
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-800">{rec.date}</span>
                       <div className="flex items-center gap-2">
                         {/* STATUS */}
                         <span
