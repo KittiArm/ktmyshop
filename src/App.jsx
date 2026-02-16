@@ -363,14 +363,13 @@ export default function App() {
                   รวม {item.total.toLocaleString()} ฿
                 </span>
               </div>
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-gray-800 text-xs">{rec.date}</span>
-              </div>
 
               <div className="space-y-2">
                 {item.records.map((rec, i) => (
                   <div key={i} className="bg-gray-50 p-3 rounded-lg flex flex-col">
-
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-800 text-xs">{rec.date}</span>
+                    </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
                         {/* STATUS */}
