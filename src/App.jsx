@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const data = [
   {
-    month: "1 พฤศจิกายน 2568",
+    month: "พฤศจิกายน 2568",
     total: 5000,
     records: [
       { date: "1 พฤศจิกายน 2568", name: "กิตติพงษ์ จัน.", amount: 4500, status: "โอนแล้ว" },
@@ -21,33 +21,9 @@ const data = [
     total: 1000,
     records: [
       { date: "24 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
-    ],
-  },
-  {
-    month: "25 กุมภาพันธ์ 2569",
-    total: 1000,
-    records: [
       { date: "25 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
-    ],
-  },
-  {
-    month: "26 กุมภาพันธ์ 2569",
-    total: 1000,
-    records: [
       { date: "26 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
-    ],
-  },
-  {
-    month: "27 กุมภาพันธ์ 2569",
-    total: 1000,
-    records: [
       { date: "27 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
-    ],
-  },
-  {
-    month: "28 กุมภาพันธ์ 2569",
-    total: 1000,
-    records: [
       { date: "28 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
