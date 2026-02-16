@@ -33,12 +33,6 @@ const data = [
 				amount: 15000,
 				status: "โอนแล้ว",
 			},
-		],
-	},
-	{
-		month: "พฤศจิกายน 2568",
-		total: 5000,
-		records: [
 			{
 				round: "1-9/30",
 				date: "1 พฤศจิกายน 2568",
