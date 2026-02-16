@@ -389,11 +389,11 @@ export default function App() {
         <svg className="w-4 h-4 me-2 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
         <span className="sr-only">Success</span>
         <div>
-          <span className="font-medium">Ensure that these requirements are met:</span>
+          <span className="font-medium">แก้วขอเริ่มเซตใหม่</span>
             <ul className="mt-2 list-disc list-outside space-y-1 ps-2.5">
-              <li>At least 10 characters (and up to 100 characters)</li>
-              <li>At least one lowercase character</li>
-              <li>Inclusion of at least one special character, e.g., ! @ # ?</li>
+              <li>กุมภาพันธ์จ่าย 5,000 (จ่ายวันละ 1,000 ในวันที่ 24/25/26/27/28)</li>
+              <li>จ่ายวันละ 500 เริ่ม 1 มีนาคม 2569</li>
+              {/* <li>Inclusion of at least one special character, e.g., ! @ # ?</li> */}
           </ul>
         </div>
       </div>
