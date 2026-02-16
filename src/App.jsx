@@ -389,11 +389,6 @@ export default function App() {
         <span className="sr-only">Success</span>
         <div>
           <span className="font-medium">รอบแรกทุกคนจะได้คืนคนละ 15,000 บาทก่อน เมื่อครบ 13 คน แล้วจะวนกลับมาเริ่มใหม่ ทั้งนี้ในรอบแรกขอแบ่งของแต่ละคนเป็นคนละ 30 งวด เพื่อให้ง่าต่อการ Tracking</span>
-            <ul className="mt-2 list-disc list-outside space-y-1 ps-2.5">
-              <li>กุมภาพันธ์จ่าย 5,000 (จ่ายวันละ 1,000 ในวันที่ 24/25/26/27/28)</li>
-              <li>จ่ายวันละ 500 เริ่ม 1 มีนาคม 2569</li>
-              {/* <li>Inclusion of at least one special character, e.g., ! @ # ?</li> */}
-          </ul>
         </div>
       </div>
       
