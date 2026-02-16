@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const data = [
   {
@@ -546,6 +546,23 @@ function getStatusColor(status) {
 export default function App() {
   const [mode, setMode] = useState("current");
 
+  const cardRefs = useRef([]);
+
+  const defaultWaitingIndex = data.findIndex((month) =>
+    month.records.some((rec) => rec.status === "รอ")
+  );
+
+  useEffect(() => {
+    if (defaultWaitingIndex !== -1) {
+      setTimeout(() => {
+        cardRefs.current[defaultWaitingIndex]?.scrollIntoView({
+          behavior: "smooth",
+          inline: "center",
+        });
+      }, 300);
+    }
+  }, []);
+
     // ✅ Filter เดือน
   const [selectedMonth, setSelectedMonth] = useState("all");
 
@@ -724,6 +741,7 @@ export default function App() {
       {finalData.map((monthItem, index) => (
         <div
           key={index}
+          ref={(el) => (cardRefs.current[index] = el)}
           className="min-w-[320px] max-w-[320px] snap-center bg-white rounded-2xl shadow-lg border p-4 flex-shrink-0"
         >
           {/* Month Header */}
