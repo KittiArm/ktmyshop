@@ -715,65 +715,80 @@ export default function App() {
       )}
 
       
-      {mode === "current" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {finalData.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500"
-            >
-              {/* MONTH HEADER */}
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold">{item.month}</h2>
-                <span className="text-blue-600 font-bold">
-                  {item.records.length} รายการ
-                </span>
-              </div>
+      {/* ---------------- CURRENT MODE ---------------- */}
+{mode === "current" && (
+  <div className="mt-6">
 
-              {/* RECORDS */}
-              {item.records.length === 0 ? (
-                <p className="text-gray-400 text-sm text-center">
-                  ไม่มีข้อมูลใน filter นี้
-                </p>
-              ) : (
-                <div className="space-y-2">
-                  {item.records.map((rec, i) => (
-                    <div
-                      key={i}
-                      className="bg-gray-50 p-3 rounded-lg flex flex-col"
+    {/* Swipe Container */}
+    <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
+      {finalData.map((monthItem, index) => (
+        <div
+          key={index}
+          className="min-w-[320px] max-w-[320px] snap-center bg-white rounded-2xl shadow-lg border p-4 flex-shrink-0"
+        >
+          {/* Month Header */}
+          <h2 className="text-lg font-bold text-blue-600">
+            {monthItem.month}
+          </h2>
+
+          <p className="text-sm text-gray-500 mb-2">
+            รวมเดือนนี้:{" "}
+            <span className="font-semibold text-black">
+              {monthItem.total.toLocaleString()} บาท
+            </span>
+          </p>
+
+          {/* Records */}
+          <div className="space-y-2 max-h-[350px] overflow-y-auto pr-1">
+            {monthItem.records.length === 0 ? (
+              <p className="text-gray-400 text-sm text-center">
+                ไม่มีข้อมูลตาม filter
+              </p>
+            ) : (
+              monthItem.records.map((rec, i) => (
+                <div
+                  key={i}
+                  className="p-3 border rounded-xl flex justify-between items-center"
+                >
+                  <div>
+                    <p className="text-sm font-medium">
+                      งวด {rec.round}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {rec.date}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {rec.name}
+                    </p>
+                  </div>
+
+                  <div className="text-right">
+                    <p className="font-semibold text-sm">
+                      {rec.amount.toLocaleString()}฿
+                    </p>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(
+                        rec.status
+                      )}`}
                     >
-                      <span className="text-xs text-gray-500">
-                        งวดที่ {rec.round} : {rec.date}
-                      </span>
-
-                      <div className="flex justify-between items-center mt-1">
-                        <div className="flex items-center gap-2">
-                          {/* STATUS */}
-                          <span
-                            className={`px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(
-                              rec.status
-                            )}`}
-                          >
-                            {rec.status}
-                          </span>
-
-                          {/* NAME */}
-                          <span className="text-gray-800">{rec.name}</span>
-                        </div>
-
-                        {/* AMOUNT */}
-                        <span className="font-semibold">
-                          {rec.amount.toLocaleString()} ฿
-                        </span>
-                      </div>
-                    </div>
-                  ))}
+                      {rec.status}
+                    </span>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+              ))
+            )}
+          </div>
         </div>
-      )}
+      ))}
+    </div>
+
+    {/* Hint */}
+    <p className="text-center text-xs text-gray-400 mt-2">
+      👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
+    </p>
+  </div>
+)}
+
     </div>
   );
 }
