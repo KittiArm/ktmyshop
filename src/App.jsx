@@ -2234,6 +2234,10 @@ export default function App() {
 
 			{mode === "current" && (
 				<div className="mt-6">
+					<p className="text-center text-xs text-gray-400 mb-2">
+						👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
+					</p>
+
 					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
 						{finalData.map((monthItem, index) => (
 							<div
@@ -2288,15 +2292,11 @@ export default function App() {
 							</div>
 						))}
 					</div>
-
-					<p className="text-center text-xs text-gray-400 mt-2">
-						👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
-					</p>
 				</div>
 			)}
 
 			<div
-				className="flex p-4 mb-4 text-sm text-blue-500 rounded-xl bg-blue-100 border border-blue-500"
+				className="flex p-4 m-4 text-sm text-blue-500 rounded-xl bg-blue-100 border border-blue-500"
 				role="alert"
 			>
 				<svg
