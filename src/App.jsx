@@ -2203,7 +2203,7 @@ export default function App() {
 			)}
 
 			{mode === "current" && (
-				<div className="flex flex-row gap-3 justify-center items-center mb-8 bg-white p-4 rounded-2xl shadow-md border max-w-fit mx-auto">
+				<div className="flex flex-row gap-3 justify-center items-center mb-2 bg-white p-4 rounded-2xl shadow-md border max-w-fit mx-auto">
 					<select
 						value={selectedMonth}
 						onChange={(e) => setSelectedMonth(e.target.value)}
