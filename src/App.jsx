@@ -344,8 +344,49 @@ function getStatusColor(status) {
   }
 }
 
+function getStatusColor(status) {
+  switch (status) {
+    case "โอนแล้ว":
+      return "bg-green-100 text-green-700 border-green-300";
+    case "รอ":
+      return "bg-yellow-100 text-yellow-700 border-yellow-300";
+    default:
+      return "bg-gray-100 text-gray-700 border-gray-300";
+  }
+}
+
 export default function App() {
   const [mode, setMode] = useState("current");
+
+    // ✅ Filter เดือน
+  const [selectedMonth, setSelectedMonth] = useState("all");
+
+  // ✅ Filter สถานะ
+  const [selectedStatus, setSelectedStatus] = useState("all");
+
+  /* ------------------ OPTIONS ------------------ */
+  const monthOptions = data.map((item) => item.month);
+
+  const statusOptions = ["รอ", "โอนแล้ว"];
+
+  /* ------------------ FILTER LOGIC ------------------ */
+  const filteredData =
+    selectedMonth === "all"
+      ? data
+      : data.filter((item) => item.month === selectedMonth);
+
+  // Filter records by status inside each month
+  const finalData = filteredData.map((item) => {
+    const filteredRecords =
+      selectedStatus === "all"
+        ? item.records
+        : item.records.filter((rec) => rec.status === selectedStatus);
+
+    return {
+      ...item,
+      records: filteredRecords,
+    };
+  });
 
   const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
@@ -453,52 +494,94 @@ export default function App() {
         </div>
       )}
 
+      {mode === "current" && (
+        <div className="flex flex-col md:flex-row gap-4 justify-center mb-8">
+          {/* FILTER MONTH */}
+          <select
+            value={selectedMonth}
+            onChange={(e) => setSelectedMonth(e.target.value)}
+            className="px-4 py-2 rounded-xl border shadow-sm text-sm"
+          >
+            <option value="all">📌 ทุกเดือน</option>
+            {monthOptions.map((month, idx) => (
+              <option key={idx} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
+
+          {/* FILTER STATUS */}
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="px-4 py-2 rounded-xl border shadow-sm text-sm"
+          >
+            <option value="all">📌 ทุกสถานะ</option>
+            {statusOptions.map((status, idx) => (
+              <option key={idx} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       
       {mode === "current" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {finalData.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500 hover:shadow-lg transition"
+              className="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500"
             >
+              {/* MONTH HEADER */}
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">{item.month}</h2>
-                <span className="text-blue-600 font-bold text-md">
-                  รวม {item.total.toLocaleString()} ฿
+                <span className="text-blue-600 font-bold">
+                  {item.records.length} รายการ
                 </span>
               </div>
 
-              <div className="space-y-2">
-                {item.records.map((rec, i) => (
-                  <div key={i} className="bg-gray-50 p-3 rounded-lg flex flex-col">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-gray-800 text-xs">งวดที่ {rec.round} : {rec.date}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-2">
-                        {/* STATUS */}
-                        <span
-                          className={`px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(
-                            rec.status
-                          )}`}
-                        >
-                          {rec.status}
-                        </span>
-
-                        {/* NAME */}
-                        <span className="text-gray-800">{rec.name}</span>
-                      </div>
-
-                      {/* AMOUNT */}
-                      <span className="font-semibold">
-                        {rec.amount.toLocaleString()} ฿
+              {/* RECORDS */}
+              {item.records.length === 0 ? (
+                <p className="text-gray-400 text-sm text-center">
+                  ไม่มีข้อมูลใน filter นี้
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {item.records.map((rec, i) => (
+                    <div
+                      key={i}
+                      className="bg-gray-50 p-3 rounded-lg flex flex-col"
+                    >
+                      <span className="text-xs text-gray-500">
+                        งวดที่ {rec.round} : {rec.date}
                       </span>
+
+                      <div className="flex justify-between items-center mt-1">
+                        <div className="flex items-center gap-2">
+                          {/* STATUS */}
+                          <span
+                            className={`px-2 py-1 text-xs font-semibold rounded-full border ${getStatusColor(
+                              rec.status
+                            )}`}
+                          >
+                            {rec.status}
+                          </span>
+
+                          {/* NAME */}
+                          <span className="text-gray-800">{rec.name}</span>
+                        </div>
+
+                        {/* AMOUNT */}
+                        <span className="font-semibold">
+                          {rec.amount.toLocaleString()} ฿
+                        </span>
+                      </div>
                     </div>
-
-                  </div>
-                ))}
-              </div>
-
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
