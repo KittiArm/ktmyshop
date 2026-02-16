@@ -2,53 +2,53 @@ import React, { useState } from "react";
 
 const data = [
   {
-    date: "1 พฤศจิกายน 2568",
+    month: "1 พฤศจิกายน 2568",
     total: 5000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 4500, status: "โอนแล้ว" },
-      { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
+      { date: "1 พฤศจิกายน 2568", name: "กิตติพงษ์ จัน.", amount: 4500, status: "โอนแล้ว" },
+      { date: "1 พฤศจิกายน 2568", name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
     ],
   },
   {
-    date: "31 มกราคม 2569",
+    month: "มกราคม 2569",
     total: 5000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
+      { date: "31 มกราคม 2569", name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
     ],
   },
   {
-    date: "24 กุมภาพันธ์ 2569",
+    month: "กุมภาพันธ์ 2569",
     total: 1000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
+      { date: "24 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "25 กุมภาพันธ์ 2569",
+    month: "25 กุมภาพันธ์ 2569",
     total: 1000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
+      { date: "25 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "26 กุมภาพันธ์ 2569",
+    month: "26 กุมภาพันธ์ 2569",
     total: 1000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
+      { date: "26 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "27 กุมภาพันธ์ 2569",
+    month: "27 กุมภาพันธ์ 2569",
     total: 1000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
+      { date: "27 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "28 กุมภาพันธ์ 2569",
+    month: "28 กุมภาพันธ์ 2569",
     total: 1000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
+      { date: "28 กุมภาพันธ์ 2569", name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   // {
@@ -67,6 +67,13 @@ const data = [
   //     { name: "ลัทธวรรณ อินทร์.", amount: 10000, status: "รอ" },
   //   ],
   // },
+  {
+    month: "กุมภาพันธ์ 2569",
+    total: 1000,
+    records: [
+      { name: "ลัทธวรรณ อินทร์.", amount: 1000, status: "รอ" },
+    ],
+  },
   // {
   //   date: "1 กุมภาพันธ์ 2569",
   //   total: 15000,
@@ -362,6 +369,7 @@ export default function App() {
                   <div key={i} className="bg-gray-50 p-3 rounded-lg flex flex-col">
 
                     <div className="flex justify-between items-center">
+                      <span className="text-gray-800">{rec.date}</span>
                       <div className="flex items-center gap-2">
                         {/* STATUS */}
                         <span
