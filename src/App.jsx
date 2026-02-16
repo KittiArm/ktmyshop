@@ -358,10 +358,13 @@ export default function App() {
               className="bg-white p-5 rounded-xl shadow-md border-l-4 border-blue-500 hover:shadow-lg transition"
             >
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold">{item.date}</h2>
+                <h2 className="text-lg font-semibold">{item.month}</h2>
                 <span className="text-blue-600 font-bold text-md">
                   รวม {item.total.toLocaleString()} ฿
                 </span>
+              </div>
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-gray-800 text-xs">{rec.date}</span>
               </div>
 
               <div className="space-y-2">
