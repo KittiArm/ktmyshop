@@ -2065,6 +2065,49 @@ const data_balance = [
 	},
 ];
 
+const calculateProgress = () => {
+  let paid = 0;
+  let total = 0;
+
+  data.forEach((month) => {
+    total += month.total;
+
+    month.records.forEach((rec) => {
+      if (rec.status === "โอนแล้ว") {
+        paid += rec.amount;
+      }
+    });
+  });
+
+  return {
+    paid,
+    total,
+    percent: total > 0 ? Math.round((paid / total) * 100) : 0,
+  };
+};
+
+const EnergyProgressBar = ({ paid, total, percent }) => {
+  return (
+    <div className="w-full mb-4">
+      <div className="flex justify-between text-sm font-medium mb-1">
+        <span>การคืนเงิน</span>
+        <span>{percent}%</span>
+      </div>
+
+      <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+        <div
+          className="bg-green-500 h-4 rounded-full transition-all duration-500"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+
+      <p className="text-xs text-gray-500 mt-1">
+        คืนแล้ว {paid.toLocaleString()} / {total.toLocaleString()} บาท
+      </p>
+    </div>
+  );
+};
+
 function getStatusColor(status) {
 	switch (status) {
 		case "โอนแล้ว":
@@ -2121,6 +2164,8 @@ export default function App() {
 
 	const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
+	const progress = calculateProgress();
+
 	return (
 		<div className="min-h-screen p-4">
 			<h1 className="text-2xl font-bold text-center">รอรับเงินคืน</h1>
@@ -2146,6 +2191,13 @@ export default function App() {
 					</div>
 				</div>
 			</div>
+
+			
+		    <EnergyProgressBar
+			      paid={progress.paid}
+			      total={progress.total}
+			      percent={progress.percent}
+		    />
 
 			{/* MODE DISPLAY */}
 			{mode === "balance" && (
