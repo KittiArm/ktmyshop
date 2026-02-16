@@ -2125,7 +2125,7 @@ export default function App() {
 		<div className="min-h-screen p-4">
 			<h1 className="text-2xl font-bold text-center mb-2">รอรับเงินคืน</h1>
 
-			<div className="flex justify-center mt-4 mb-6">
+			<div className="flex justify-center mt-4 mb-2">
 				<div
 					className="flex items-center bg-white p-1 rounded-full shadow cursor-pointer select-none"
 					onClick={() => setMode(mode === "current" ? "balance" : "current")}
@@ -2203,10 +2203,7 @@ export default function App() {
 			)}
 
 			{mode === "current" && (
-				<div className="flex flex-row 
-					gap-3 justify-center items-center mb-2 
-					{/* bg-white p-4 rounded-2xl shadow-md border max-w-fit mx-auto */}
-					">
+				<div className="flex flex-row gap-3 justify-center items-center mb-2 bg-white p-4 rounded-2xl shadow-md border max-w-fit mx-auto">
 					<select
 						value={selectedMonth}
 						onChange={(e) => setSelectedMonth(e.target.value)}
