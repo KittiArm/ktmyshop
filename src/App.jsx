@@ -2295,7 +2295,7 @@ export default function App() {
 				</div>
 			)}
 
-			<div
+			{/* <div
 				className="flex p-4 m-4 text-sm text-blue-500 rounded-xl bg-blue-100 border border-blue-500"
 				role="alert"
 			>
@@ -2355,6 +2355,6 @@ export default function App() {
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div> */}
 	);
 }
