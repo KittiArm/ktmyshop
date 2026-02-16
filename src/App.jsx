@@ -2234,10 +2234,6 @@ export default function App() {
 
 			{mode === "current" && (
 				<div className="mt-2">
-					<p className="text-center text-xs text-gray-400 mb-2">
-						👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
-					</p>
-
 					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
 						{finalData.map((monthItem, index) => (
 							<div
@@ -2292,6 +2288,9 @@ export default function App() {
 							</div>
 						))}
 					</div>
+					<p className="text-center text-xs text-gray-400 mb-t">
+						👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
+					</p>
 				</div>
 			)}
 		</div>
