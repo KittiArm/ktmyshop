@@ -6,88 +6,130 @@ const data = [
     total: 5000,
     records: [
       { name: "กิตติพงษ์ จัน.", amount: 4500, status: "โอนแล้ว" },
-      // { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
+      { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
     ],
   },
   {
-    date: "1 ธันวาคม 2568",
+    date: "31 มกราคม 2569",
     total: 5000,
     records: [
       { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
-      { name: "กิตติพงษ์ จัน.", amount: 4500, status: "รอ" },
     ],
   },
   {
-    date: "1 มกราคม 2569",
-    total: 15000,
+    date: "24 กุมภาพันธ์ 2569",
+    total: 1000,
     records: [
-      { name: "กิตติพงษ์ จัน.", amount: 5000, status: "รอ" },
-      { name: "ลัทธวรรณ อินทร์.", amount: 10000, status: "รอ" },
+      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "1 กุมภาพันธ์ 2569",
-    total: 15000,
+    date: "25 กุมภาพันธ์ 2569",
+    total: 1000,
     records: [
-      { name: "ลัทธวรรณ อินทร์.", amount: 5000, status: "รอ" },
-      { name: "จุฑารัตน์ ทิพ.", amount: 10000, status: "รอ" },
+      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "1 มีนาคม 2569",
-    total: 15000,
+    date: "26 กุมภาพันธ์ 2569",
+    total: 1000,
     records: [
-      { name: "จุฑารัตน์ ทิพ.", amount: 5000, status: "รอ" },
-      { name: "สรารัตน์ นน.", amount: 10000, status: "รอ" },
+      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "1 เมษายน 2569",
-    total: 15000,
+    date: "27 กุมภาพันธ์ 2569",
+    total: 1000,
     records: [
-      { name: "สรารัตน์ นน.", amount: 5000, status: "รอ" },
-      { name: "จุฑาทิพย์ ปร.", amount: 10000, status: "รอ" },
+      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
   {
-    date: "1 พฤษภาคม 2569",
-    total: 15000,
+    date: "28 กุมภาพันธ์ 2569",
+    total: 1000,
     records: [
-      { name: "จุฑาทิพย์ ปร.", amount: 5000, status: "รอ" },
-      { name: "อภิญญา มูล.", amount: 10000, status: "รอ" },
+      { name: "กิตติพงษ์ จัน.", amount: 1000, status: "รอ" },
     ],
   },
-  {
-    date: "1 มิถุนายน 2569",
-    total: 15000,
-    records: [
-      { name: "อภิญญา มูล.", amount: 5000, status: "รอ" },
-      { name: "อารีรักษ์ นพ.", amount: 10000, status: "รอ" },
-    ],
-  },
-  {
-    date: "1 กรกฎาคม 2569",
-    total: 15000,
-    records: [
-      { name: "อารีรักษ์ นพ.", amount: 5000, status: "รอ" },
-      { name: "สุภารัตน์ สง.", amount: 10000, status: "รอ" },
-    ],
-  },
-  {
-    date: "1 สิงหาคม 2569",
-    total: 15000,
-    records: [
-      { name: "สุภารัตน์ สง.", amount: 5000, status: "รอ" },
-      { name: "เศรษฐวัฒน์ ศรี.", amount: 10000, status: "รอ" },
-    ],
-  },
-  {
-    date: "1 กันยายน 2569",
-    total: 15000,
-    records: [
-      { name: "เศรษฐวัฒน์ ศรี.", amount: 5000, status: "รอ" },
-    ],
-  },
+  // {
+  //   date: "1 ธันวาคม 2568",
+  //   total: 5000,
+  //   records: [
+  //     { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
+  //     { name: "กิตติพงษ์ จัน.", amount: 4500, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 มกราคม 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "กิตติพงษ์ จัน.", amount: 5000, status: "รอ" },
+  //     { name: "ลัทธวรรณ อินทร์.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 กุมภาพันธ์ 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "ลัทธวรรณ อินทร์.", amount: 5000, status: "รอ" },
+  //     { name: "จุฑารัตน์ ทิพ.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 มีนาคม 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "จุฑารัตน์ ทิพ.", amount: 5000, status: "รอ" },
+  //     { name: "สรารัตน์ นน.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 เมษายน 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "สรารัตน์ นน.", amount: 5000, status: "รอ" },
+  //     { name: "จุฑาทิพย์ ปร.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 พฤษภาคม 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "จุฑาทิพย์ ปร.", amount: 5000, status: "รอ" },
+  //     { name: "อภิญญา มูล.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 มิถุนายน 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "อภิญญา มูล.", amount: 5000, status: "รอ" },
+  //     { name: "อารีรักษ์ นพ.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 กรกฎาคม 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "อารีรักษ์ นพ.", amount: 5000, status: "รอ" },
+  //     { name: "สุภารัตน์ สง.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 สิงหาคม 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "สุภารัตน์ สง.", amount: 5000, status: "รอ" },
+  //     { name: "เศรษฐวัฒน์ ศรี.", amount: 10000, status: "รอ" },
+  //   ],
+  // },
+  // {
+  //   date: "1 กันยายน 2569",
+  //   total: 15000,
+  //   records: [
+  //     { name: "เศรษฐวัฒน์ ศรี.", amount: 5000, status: "รอ" },
+  //   ],
+  // },
 ];
 
 const data_balance = [
