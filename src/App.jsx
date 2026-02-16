@@ -6,7 +6,7 @@ const data = [
     total: 5000,
     records: [
       { name: "กิตติพงษ์ จัน.", amount: 4500, status: "โอนแล้ว" },
-      { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
+      // { name: "กิตติพงษ์ จัน.", amount: 500, status: "โอนแล้ว" },
     ],
   },
   {
