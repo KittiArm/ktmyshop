@@ -2099,32 +2099,32 @@ const data_balance = [
 	},
 ];
 
-const calculateProgress = () => {
-	let paid = 0;
-	let total = 0;
+const calculateBalanceProgress = () => {
+	let grandTotal = 0;
+	let grandPaid = 0;
 
-	data.forEach((month) => {
-		total += month.total;
+	data_balance.forEach((person) => {
+		grandTotal += person.total;
 
-		month.records.forEach((rec) => {
-			if (rec.status === "โอนแล้ว") {
-				paid += rec.amount;
-			}
-		});
+		if (person.paid && Array.isArray(person.paid)) {
+			person.paid.forEach((p) => {
+				grandPaid += p.paid;
+			});
+		}
 	});
 
 	return {
-		paid,
-		total,
-		percent: total > 0 ? Math.round((paid / total) * 100) : 0,
+		grandTotal,
+		grandPaid,
+		percent: grandTotal > 0 ? Math.round((grandPaid / grandTotal) * 100) : 0,
 	};
 };
 
-const EnergyProgressBar = ({ paid, total, percent }) => {
+const EnergyProgressBar = ({ grandPaid, grandTotal, percent }) => {
 	return (
-		<div className="w-full mb-4">
-			<div className="flex justify-between text-sm font-medium mb-1">
-				<span>การคืนเงิน</span>
+		<div className="w-full mb-6 p-4 rounded-2xl bg-white shadow">
+			<div className="flex justify-between text-sm font-semibold mb-2">
+				<span>💰 Progress การจ่ายทั้งหมด</span>
 				<span>{percent}%</span>
 			</div>
 
@@ -2135,8 +2135,8 @@ const EnergyProgressBar = ({ paid, total, percent }) => {
 				/>
 			</div>
 
-			<p className="text-xs text-gray-500 mt-1">
-				คืนแล้ว {paid.toLocaleString()} / {total.toLocaleString()} บาท
+			<p className="text-xs text-gray-500 mt-2">
+				จ่ายแล้ว {grandPaid.toLocaleString()} / {grandTotal.toLocaleString()} บาท
 			</p>
 		</div>
 	);
@@ -2198,7 +2198,7 @@ export default function App() {
 
 	const totalBalance = data.reduce((sum, item) => sum + item.total, 0);
 
-	const progress = calculateProgress();
+    const progress = calculateBalanceProgress();
 
 	return (
 		<div className="min-h-screen p-4">
