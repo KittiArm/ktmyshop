@@ -2,6 +2,40 @@ import React, { useState, useEffect, useRef } from "react";
 
 const data = [
 	{
+		month: "2568",
+		total: 5000,
+		records: [
+			{
+				round: "30/30",
+				date: "ไม่ระบุ",
+				name: "วิชุดา วง.",
+				amount: 15000,
+				status: "โอนแล้ว",
+			},
+			{
+				round: "30/30",
+				date: "ไม่ระบุ",
+				name: "อริสรา ยุ.",
+				amount: 15000,
+				status: "โอนแล้ว",
+			},
+			{
+				round: "30/30",
+				date: "ไม่ระบุ",
+				name: "กมลวรรณ ใจ.",
+				amount: 15000,
+				status: "โอนแล้ว",
+			},
+			{
+				round: "30/30",
+				date: "ไม่ระบุ",
+				name: "จินต์จุฑา พฤ.",
+				amount: 15000,
+				status: "โอนแล้ว",
+			},
+		],
+	},
+	{
 		month: "พฤศจิกายน 2568",
 		total: 5000,
 		records: [
@@ -2066,46 +2100,46 @@ const data_balance = [
 ];
 
 const calculateProgress = () => {
-  let paid = 0;
-  let total = 0;
+	let paid = 0;
+	let total = 0;
 
-  data.forEach((month) => {
-    total += month.total;
+	data.forEach((month) => {
+		total += month.total;
 
-    month.records.forEach((rec) => {
-      if (rec.status === "โอนแล้ว") {
-        paid += rec.amount;
-      }
-    });
-  });
+		month.records.forEach((rec) => {
+			if (rec.status === "โอนแล้ว") {
+				paid += rec.amount;
+			}
+		});
+	});
 
-  return {
-    paid,
-    total,
-    percent: total > 0 ? Math.round((paid / total) * 100) : 0,
-  };
+	return {
+		paid,
+		total,
+		percent: total > 0 ? Math.round((paid / total) * 100) : 0,
+	};
 };
 
 const EnergyProgressBar = ({ paid, total, percent }) => {
-  return (
-    <div className="w-full mb-4">
-      <div className="flex justify-between text-sm font-medium mb-1">
-        <span>การคืนเงิน</span>
-        <span>{percent}%</span>
-      </div>
+	return (
+		<div className="w-full mb-4">
+			<div className="flex justify-between text-sm font-medium mb-1">
+				<span>การคืนเงิน</span>
+				<span>{percent}%</span>
+			</div>
 
-      <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-        <div
-          className="bg-green-500 h-4 rounded-full transition-all duration-500"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
+			<div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+				<div
+					className="bg-green-500 h-4 rounded-full transition-all duration-500"
+					style={{ width: `${percent}%` }}
+				/>
+			</div>
 
-      <p className="text-xs text-gray-500 mt-1">
-        คืนแล้ว {paid.toLocaleString()} / {total.toLocaleString()} บาท
-      </p>
-    </div>
-  );
+			<p className="text-xs text-gray-500 mt-1">
+				คืนแล้ว {paid.toLocaleString()} / {total.toLocaleString()} บาท
+			</p>
+		</div>
+	);
 };
 
 function getStatusColor(status) {
@@ -2193,11 +2227,11 @@ export default function App() {
 			</div>
 
 			<div className="px-4">
-			    <EnergyProgressBar
-				      paid={progress.paid}
-				      total={progress.total}
-				      percent={progress.percent}
-			    />
+				<EnergyProgressBar
+					paid={progress.paid}
+					total={progress.total}
+					percent={progress.percent}
+				/>
 			</div>
 
 			{/* MODE DISPLAY */}
