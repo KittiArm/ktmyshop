@@ -2226,13 +2226,13 @@ export default function App() {
 				</div>
 			</div>
 
-			<div className="px-4">
+			{/* <div className="px-4">
 			    <EnergyProgressBar
 				      paid={progress.paid}
 				      total={progress.total}
 				      percent={progress.percent}
 			    />
-			</div>
+			</div> */}
 
 			{/* MODE DISPLAY */}
 			{mode === "balance" && (
