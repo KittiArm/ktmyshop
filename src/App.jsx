@@ -388,7 +388,7 @@ export default function App() {
         <svg className="w-4 h-4 me-2 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
         <span className="sr-only">Success</span>
         <div>
-          <span className="font-medium">รอบแรกทุกคนจะได้คืนคนละ 15,000 บาทก่อน เมื่อครบ 13 คน แล้วจะวนกลับมาเริ่มใหม่ ทั้งนี้ในรอบแรกขอแบ่งของแต่ละคนเป็นคนละ 30 งวด เพื่อให้ง่าต่อการ Tracking</span>
+          <span className="font-medium">รอบแรกทุกคนจะได้คืนคนละ 15,000 บาทก่อน เมื่อครบ 13 คน แล้วจะวนกลับมาเริ่มใหม่ ทั้งนี้ในรอบแรกขอแบ่งของแต่ละคนเป็นคนละ 30 งวด เพื่อให้ง่ายต่อการ Tracking</span>
         </div>
       </div>
       
