@@ -2192,12 +2192,13 @@ export default function App() {
 				</div>
 			</div>
 
-			
-		    <EnergyProgressBar
-			      paid={progress.paid}
-			      total={progress.total}
-			      percent={progress.percent}
-		    />
+			<div className="bg-white p-2 rounded-xl shadow-md hover:shadow-lg transition">
+			    <EnergyProgressBar
+				      paid={progress.paid}
+				      total={progress.total}
+				      percent={progress.percent}
+			    />
+			</div>
 
 			{/* MODE DISPLAY */}
 			{mode === "balance" && (
