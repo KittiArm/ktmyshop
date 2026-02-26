@@ -78,7 +78,7 @@ const data = [
 				date: "26 กุมภาพันธ์ 2569",
 				name: "กิตติพงษ์ จัน.",
 				amount: 1000,
-				status: "รอ",
+				status: "ล่าช้า",
 			},
 			{
 				round: "16-17/30",
@@ -2026,6 +2026,7 @@ const data_balance = [
 			{ date: "2 ธันวาคม 2568", paid: 4500 },
 			{ date: "2 ธันวาคม 2568", paid: 500 },
 			{ date: "31 มกราคม 2569", paid: 500 },
+			{ date: "25 กุมภาพันธ์ 2569", paid: 1000 },
 		],
 	},
 	{
@@ -2133,6 +2134,8 @@ function getStatusColor(status) {
 	switch (status) {
 		case "โอนแล้ว":
 			return "bg-green-100 text-green-700 border-green-300";
+		case "ล่าช้า":
+			return "bg-red-100 text-red-700 border-red-300 animate-soft-blink";
 		case "รอ":
 			return "bg-yellow-100 text-yellow-700 border-yellow-300 animate-soft-blink";
 		default:
@@ -2164,7 +2167,7 @@ export default function App() {
 	const [selectedStatus, setSelectedStatus] = useState("all");
 
 	const monthOptions = data.map((item) => item.month);
-	const statusOptions = ["รอ", "โอนแล้ว"];
+	const statusOptions = ["รอ", "โอนแล้ว", "ล่าช้า"];
 
 	const filteredData =
 		selectedMonth === "all"
