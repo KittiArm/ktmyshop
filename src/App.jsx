@@ -77,7 +77,7 @@ const data = [
 				round: "14/30",
 				date: "26 กุมภาพันธ์ 2569",
 				name: "กิตติพงษ์ จัน.",
-				amount: 1000,
+				amount: 500,
 				status: "โอนแล้ว",
 			},
 			{
