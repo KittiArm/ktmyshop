@@ -112,7 +112,7 @@ const data = [
 				date: "1 มีนาคม 2569",
 				name: "กิตติพงษ์ จัน.",
 				amount: 500,
-				status: "รอ",
+				status: "โอนแล้ว",
 			},
 			{
 				round: "23/30",
