@@ -162,6 +162,14 @@ export default function App() {
 
 
 	const createInvoiceDOM = async (list, total) => {
+		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+		// 🔥 เปิดแท็บทันที (ยังไม่มี await)
+		let newTab = null;
+		if (isIOS) {
+			newTab = window.open("", "_blank");
+		}
+
 		const container = document.createElement("div");
 
 		container.style.width = "528px";
@@ -174,54 +182,14 @@ export default function App() {
 		container.style.left = "-9999px";
 		container.style.top = "0";
 
-		container.innerHTML = `
-			<h1 style="text-align:center;color:#dc2626;margin-bottom:20px">
-				ยอดคงค้าง
-			</h1>
-
-			<p>วันที่: ${new Date().toLocaleDateString()}</p>
-			<br>
-			<hr/>
-
-			<div style="margin-top:20px;max-height:320px;overflow:hidden;">
-				<table style="width:100%;border-collapse:collapse;">
-					<thead>
-						<tr>
-							<th style="padding:8px">งวด</th>
-							<th style="padding:8px">ชื่อ</th>
-							<th style="padding:8px">จำนวนเงิน</th>
-						</tr>
-					</thead>
-					<tbody>
-						${list.map(item => `
-							<tr>
-								<td style="padding:8px">${item.month}</td>
-								<td style="padding:8px">${item.name}</td>
-								<td style="padding:8px;text-align:right">
-									${item.amount.toLocaleString()} ฿
-								</td>
-							</tr>
-						`).join("")}
-					</tbody>
-				</table>
-			</div>
-
-			<h2 style="text-align:right;margin-top:20px;color:#dc2626">
-				รวมยอดค้าง: ${total.toLocaleString()} ฿
-			</h2>
-		`;
+		container.innerHTML = `...`;
 
 		document.body.appendChild(container);
 
-		const canvas = await html2canvas(container, {
-			scale: 2,
-		});
+		const canvas = await html2canvas(container, { scale: 2 });
+		const dataUrl = canvas.toDataURL("image/png");
 
-		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-		if (isIOS) {
-			const dataUrl = canvas.toDataURL("image/png");
-			const newTab = window.open();
+		if (isIOS && newTab) {
 			newTab.document.write(`
 				<html>
 					<head><title>Invoice</title></head>
@@ -233,7 +201,7 @@ export default function App() {
 		} else {
 			const link = document.createElement("a");
 			link.download = "invoice.png";
-			link.href = canvas.toDataURL("image/png");
+			link.href = dataUrl;
 			link.click();
 		}
 
