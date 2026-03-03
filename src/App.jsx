@@ -114,13 +114,22 @@ export default function App() {
 			: balanceData.filter(item => item.name === selectedPerson);
 
 	const generateInvoiceImage = async () => {
-		const today = new Date();
-
 		let pendingList = [];
 
 		paymentData.forEach((month) => {
 			month.records.forEach((rec) => {
-				const recordDate = dayjs(rec.date, "D MMMM BBBB");
+
+				if (rec.date === "ไม่ระบุ") return;
+
+				const parts = rec.date.split(" ");
+				const day = parts[0];
+				const monthName = parts[1];
+				const buddhistYear = parseInt(parts[2]);
+
+				const christianYear = buddhistYear - 543;
+
+				const formattedDate = `${day} ${monthName} ${christianYear}`;
+				const recordDate = dayjs(formattedDate, "D MMMM YYYY");
 
 				if (
 					rec.status === "รอ" &&
