@@ -6,7 +6,7 @@ import { balanceData } from "./data/balanceData";
 import ProgressBar from "./components/ProgressBar";
 import ProgressTextRatio from "./components/ProgressTextRatio";
 import ProgressText from "./components/ProgressText";
-import { notification } from "antd";
+import { Button, notification } from "antd";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -232,12 +232,12 @@ export default function App() {
 						เช็คยอดคงเหลือ
 					</div>
 				</div>
-				<div 
+				<Button 
 					className="flex text-sm text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
 					onClick={generateInvoiceImage}
 				>
 					<FontAwesomeIcon icon={faDownload} /> ยอดคงค้าง
-				</div>
+				</Button>
 			</div>
 
 			{/* MODE DISPLAY */}
