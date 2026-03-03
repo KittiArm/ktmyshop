@@ -217,10 +217,25 @@ export default function App() {
 			scale: 2,
 		});
 
-		const link = document.createElement("a");
-		link.download = "invoice.png";
-		link.href = canvas.toDataURL("image/png");
-		link.click();
+		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+		if (isIOS) {
+			const dataUrl = canvas.toDataURL("image/png");
+			const newTab = window.open();
+			newTab.document.write(`
+				<html>
+					<head><title>Invoice</title></head>
+					<body style="margin:0">
+						<img src="${dataUrl}" style="width:100%" />
+					</body>
+				</html>
+			`);
+		} else {
+			const link = document.createElement("a");
+			link.download = "invoice.png";
+			link.href = canvas.toDataURL("image/png");
+			link.click();
+		}
 
 		document.body.removeChild(container);
 	};
