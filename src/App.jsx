@@ -14,10 +14,10 @@ import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
 
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 import "dayjs/locale/th";
-import buddhistEra from "dayjs/plugin/buddhistEra";
 
-dayjs.extend(buddhistEra);
+dayjs.extend(customParseFormat);
 dayjs.locale("th");
 
 function getStatusColor(status) {
