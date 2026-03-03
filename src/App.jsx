@@ -6,49 +6,7 @@ import { balanceData } from "./data/balanceData";
 import ProgressBar from "./components/ProgressBar";
 import ProgressTextRatio from "./components/ProgressTextRatio";
 import ProgressText from "./components/ProgressText";
-
-const calculateProgress = () => {
-	let paid = 0;
-	let total = 0;
-
-	paymentData.forEach((month) => {
-		total += month.total;
-
-		month.records.forEach((rec) => {
-			if (rec.status === "โอนแล้ว") {
-				paid += rec.amount;
-			}
-		});
-	});
-
-	return {
-		paid,
-		total,
-		percent: total > 0 ? Math.round((paid / total) * 100) : 0,
-	};
-};
-
-const EnergyProgressBar = ({ paid, total, percent }) => {
-  return (
-    <div className="w-full mb-4">
-      <div className="flex justify-between text-sm font-medium mb-1">
-        <span>การคืนเงิน</span>
-        <span>{percent}%</span>
-      </div>
-
-      <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-        <div
-          className="bg-green-500 h-4 rounded-full transition-all duration-500"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-
-      <p className="text-xs text-gray-500 mt-1">
-        คืนแล้ว {paid.toLocaleString()} / {total.toLocaleString()} บาท
-      </p>
-    </div>
-  );
-};
+import { Alert, notification } from "antd";
 
 function getStatusColor(status) {
 	switch (status) {
@@ -64,6 +22,7 @@ function getStatusColor(status) {
 }
 
 export default function App() {
+	const [showNotification, setShowNotification] = useState(true);
 	const [mode, setMode] = useState("current");
 
 	const cardRefs = useRef([]);
@@ -80,6 +39,22 @@ export default function App() {
 					inline: "center",
 				});
 			}, 300);
+		}
+	}, []);
+
+	const hasShown = useRef(false);
+
+	useEffect(() => {
+		if (!hasShown.current) {
+			notification.open({
+				message: "👋 สวัสดี!",
+				description: "ยินดีต้อนรับเข้าสู่ระบบตรวจสอบการคืนเงิน",
+				duration: 5,
+				placement: "bottom",
+			});
+			// <Alert title="Success Text" type="success" />
+
+			hasShown.current = true;
 		}
 	}, []);
 
@@ -106,10 +81,6 @@ export default function App() {
 		};
 	});
 
-	const totalBalance = balanceData.reduce((sum, item) => sum + item.total, 0);
-
-	const progress = calculateProgress();
-
 	const totalPaidAll = balanceData.reduce((sum, item) => {
 		const paid = item.paid
 			? item.paid.reduce((s, p) => s + p.paid, 0)
@@ -122,6 +93,13 @@ export default function App() {
 		(sum, item) => sum + item.total,
 		0
 	);
+
+	const [selectedPerson, setSelectedPerson] = useState("all");
+	const personOptions = balanceData.map(item => item.name);
+	const filteredBalanceData =
+		selectedPerson === "all"
+			? balanceData
+			: balanceData.filter(item => item.name === selectedPerson);
 
 	return (
 		<div className="min-h-screen p-4">
@@ -166,9 +144,23 @@ export default function App() {
 								{totalPaidAll.toLocaleString()} / {totalAll.toLocaleString()} ฿
 							</span>
 						</div>
+						<div className="w-full mt-1">
+							<select
+								value={selectedPerson}
+								onChange={(e) => setSelectedPerson(e.target.value)}
+								className="w-full px-4 py-2 rounded-xl border shadow-sm text-sm bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+							>
+								<option value="all">📌 ทุกคน</option>
+								{personOptions.map((name, idx) => (
+									<option key={idx} value={name}>
+										{name}
+									</option>
+								))}
+							</select>
+						</div>
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-						{balanceData.map((item, index) => {
+						{filteredBalanceData.map((item, index) => {
 							const totalPaid = item.paid
 								? item.paid.reduce((sum, p) => sum + p.paid, 0)
 								: 0;
@@ -198,8 +190,8 @@ export default function App() {
 										</div>
 
 										<div className="flex flex-col items-end text-right whitespace-nowrap">
-											<span className="text-red-400 text-xs">
-												เต็ม: {item.total.toLocaleString()} ฿
+											<span className="text-blue-500 text-xs">
+												เต็ม: {item.total.toFixed(2).toLocaleString()} ฿
 											</span>
 											<span className="text-green-500 text-xs">
 												จ่ายแล้ว: {totalPaid.toLocaleString()} ฿
@@ -247,97 +239,95 @@ export default function App() {
 								{totalPaidAll.toLocaleString()} / {totalAll.toLocaleString()} ฿
 							</span>
 						</div>
-					</div>
-					<div className="flex flex-row gap-3 justify-center items-center mb-2 bg-white p-4 rounded-2xl shadow-md border max-w-fi">
-						<select
-							value={selectedMonth}
-							onChange={(e) => setSelectedMonth(e.target.value)}
-							className="px-4 py-2 rounded-xl border shadow-sm text-sm bg-white"
-						>
-							<option value="all">📌 ทุกเดือน</option>
-							{monthOptions.map((month, idx) => (
-								<option key={idx} value={month}>
-									{month}
-								</option>
-							))}
-						</select>
+						<div className="flex flex-row gap-3 justify-center items-center rounded-2xl max-w-fit mt-1">
+							<select
+								value={selectedMonth}
+								onChange={(e) => setSelectedMonth(e.target.value)}
+								className="px-4 py-2 rounded-xl border shadow-sm text-sm bg-white"
+							>
+								<option value="all">📌 ทุกเดือน</option>
+								{monthOptions.map((month, idx) => (
+									<option key={idx} value={month}>
+										{month}
+									</option>
+								))}
+							</select>
 
-						<select
-							value={selectedStatus}
-							onChange={(e) => setSelectedStatus(e.target.value)}
-							className="px-4 py-2 rounded-xl border shadow-sm text-sm bg-white"
-						>
-							<option value="all">📌 ทุกสถานะ</option>
-							{statusOptions.map((status, idx) => (
-								<option key={idx} value={status}>
-									{status}
-								</option>
+							<select
+								value={selectedStatus}
+								onChange={(e) => setSelectedStatus(e.target.value)}
+								className="px-4 py-2 rounded-xl border shadow-sm text-sm bg-white"
+							>
+								<option value="all">📌 ทุกสถานะ</option>
+								{statusOptions.map((status, idx) => (
+									<option key={idx} value={status}>
+										{status}
+									</option>
+								))}
+							</select>
+						</div>
+					</div>
+					
+					<div className="mt-2">
+						<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
+							{finalData.map((monthItem, index) => (
+								<div
+									key={index}
+									ref={(el) => (cardRefs.current[index] = el)}
+									className="min-w-[320px] max-w-[320px] snap-center bg-white rounded-2xl shadow-lg border p-4 flex-shrink-0"
+								>
+									<h2 className="text-lg font-bold text-blue-600">
+										{monthItem.month}
+									</h2>
+
+									<p className="text-sm text-gray-500 mb-2">
+										รวมเดือนนี้:{" "}
+										<span className="font-semibold text-black">
+											{monthItem.total.toLocaleString()} บาท
+										</span>
+									</p>
+
+									<div className="space-y-2 max-h-[350px] overflow-y-auto pr-1">
+										{monthItem.records.length === 0 ? (
+											<p className="text-gray-400 text-sm text-center">
+												ไม่มีข้อมูลตาม filter
+											</p>
+										) : (
+											monthItem.records.map((rec, i) => (
+												<div
+													key={i}
+													className="p-3 border rounded-xl flex justify-between items-center"
+												>
+													<div>
+														<p className="text-sm font-medium">งวด {rec.round}</p>
+														<p className="text-xs text-gray-500">{rec.date}</p>
+														<p className="text-xs text-gray-500">{rec.name}</p>
+													</div>
+
+													<div className="text-right">
+														<p className="font-semibold text-sm">
+															{rec.amount.toLocaleString()}฿
+														</p>
+														<span
+															className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(
+																rec.status,
+															)}`}
+														>
+															{rec.status}
+														</span>
+													</div>
+												</div>
+											))
+										)}
+									</div>
+								</div>
 							))}
-						</select>
+						</div>
+						<p className="text-center text-xs text-gray-400 mb-t">
+							👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
+						</p>
 					</div>
 				</>
-			)}
-
-			{mode === "current" && (
-				<div className="mt-2">
-					<div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4">
-						{finalData.map((monthItem, index) => (
-							<div
-								key={index}
-								ref={(el) => (cardRefs.current[index] = el)}
-								className="min-w-[320px] max-w-[320px] snap-center bg-white rounded-2xl shadow-lg border p-4 flex-shrink-0"
-							>
-								<h2 className="text-lg font-bold text-blue-600">
-									{monthItem.month}
-								</h2>
-
-								<p className="text-sm text-gray-500 mb-2">
-									รวมเดือนนี้:{" "}
-									<span className="font-semibold text-black">
-										{monthItem.total.toLocaleString()} บาท
-									</span>
-								</p>
-
-								<div className="space-y-2 max-h-[350px] overflow-y-auto pr-1">
-									{monthItem.records.length === 0 ? (
-										<p className="text-gray-400 text-sm text-center">
-											ไม่มีข้อมูลตาม filter
-										</p>
-									) : (
-										monthItem.records.map((rec, i) => (
-											<div
-												key={i}
-												className="p-3 border rounded-xl flex justify-between items-center"
-											>
-												<div>
-													<p className="text-sm font-medium">งวด {rec.round}</p>
-													<p className="text-xs text-gray-500">{rec.date}</p>
-													<p className="text-xs text-gray-500">{rec.name}</p>
-												</div>
-
-												<div className="text-right">
-													<p className="font-semibold text-sm">
-														{rec.amount.toLocaleString()}฿
-													</p>
-													<span
-														className={`text-xs px-2 py-1 rounded-full border ${getStatusColor(
-															rec.status,
-														)}`}
-													>
-														{rec.status}
-													</span>
-												</div>
-											</div>
-										))
-									)}
-								</div>
-							</div>
-						))}
-					</div>
-					<p className="text-center text-xs text-gray-400 mb-t">
-						👈 ปัดซ้าย–ขวาเพื่อดูแต่ละเดือน
-					</p>
-				</div>
 			)}
 		</div>
 	);
