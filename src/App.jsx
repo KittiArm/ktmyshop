@@ -241,7 +241,7 @@ export default function App() {
 					</div>
 				</div>
 				<div 
-					className="flex text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
+					className="flex text-sm text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
 					onClick={generateInvoiceImage}
 				>
 					<FontAwesomeIcon icon={faDownload} /> ยอดคงค้าง
