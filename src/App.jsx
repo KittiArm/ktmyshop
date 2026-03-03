@@ -6,7 +6,19 @@ import { balanceData } from "./data/balanceData";
 import ProgressBar from "./components/ProgressBar";
 import ProgressTextRatio from "./components/ProgressTextRatio";
 import ProgressText from "./components/ProgressText";
-import { Alert, notification } from "antd";
+import { notification } from "antd";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+
+import html2canvas from "html2canvas";
+
+import dayjs from "dayjs";
+import "dayjs/locale/th";
+import buddhistEra from "dayjs/plugin/buddhistEra";
+
+dayjs.extend(buddhistEra);
+dayjs.locale("th");
 
 function getStatusColor(status) {
 	switch (status) {
@@ -101,11 +113,114 @@ export default function App() {
 			? balanceData
 			: balanceData.filter(item => item.name === selectedPerson);
 
+	const generateInvoiceImage = async () => {
+		const today = new Date();
+
+		let pendingList = [];
+
+		paymentData.forEach((month) => {
+			month.records.forEach((rec) => {
+				const recordDate = dayjs(rec.date, "D MMMM BBBB");
+
+				if (
+					rec.status === "รอ" &&
+					recordDate.isValid() &&
+					recordDate.isBefore(dayjs(), "day")
+				) {
+					pendingList.push({
+						month: month.month,
+						...rec,
+					});
+				}
+			});
+		});
+
+		if (pendingList.length === 0) {
+			notification.warning({
+				message: "ไม่มียอดคงค้าง",
+				description: "ไม่มีรายการที่รอและเลยกำหนด",
+			});
+			return;
+		}
+
+		const totalAmount = pendingList.reduce(
+			(sum, item) => sum + item.amount,
+			0
+		);
+
+		createInvoiceDOM(pendingList, totalAmount);
+	};
+
+
+	const createInvoiceDOM = async (list, total) => {
+		const container = document.createElement("div");
+
+		container.style.width = "528px";
+		container.style.height = "864px";
+		container.style.padding = "40px";
+		container.style.background = "white";
+		container.style.fontFamily = "sans-serif";
+		container.style.boxSizing = "border-box";
+		container.style.position = "fixed";
+		container.style.left = "-9999px";
+		container.style.top = "0";
+
+		container.innerHTML = `
+			<h1 style="text-align:center;color:#dc2626;margin-bottom:20px">
+				ยอดคงค้าง
+			</h1>
+
+			<p>วันที่: ${new Date().toLocaleDateString()}</p>
+			<br>
+			<hr/>
+
+			<div style="margin-top:20px;max-height:320px;overflow:hidden;">
+				<table style="width:100%;border-collapse:collapse;">
+					<thead>
+						<tr>
+							<th style="padding:8px">งวด</th>
+							<th style="padding:8px">ชื่อ</th>
+							<th style="padding:8px">จำนวนเงิน</th>
+						</tr>
+					</thead>
+					<tbody>
+						${list.map(item => `
+							<tr>
+								<td style="padding:8px">${item.month}</td>
+								<td style="padding:8px">${item.name}</td>
+								<td style="padding:8px;text-align:right">
+									${item.amount.toLocaleString()} ฿
+								</td>
+							</tr>
+						`).join("")}
+					</tbody>
+				</table>
+			</div>
+
+			<h2 style="text-align:right;margin-top:20px;color:#dc2626">
+				รวมยอดค้าง: ${total.toLocaleString()} ฿
+			</h2>
+		`;
+
+		document.body.appendChild(container);
+
+		const canvas = await html2canvas(container, {
+			scale: 2,
+		});
+
+		const link = document.createElement("a");
+		link.download = "invoice.png";
+		link.href = canvas.toDataURL("image/png");
+		link.click();
+
+		document.body.removeChild(container);
+	};
+
 	return (
 		<div className="min-h-screen p-4">
 			<h1 className="text-2xl font-bold text-center">รอรับเงินคืน</h1>
 
-			<div className="flex justify-center mt-4 mb-2">
+			<div className="flex justify-between mt-4 mb-2">
 				<div
 					className="flex items-center bg-white p-1 rounded-full shadow cursor-pointer select-none"
 					onClick={() => setMode(mode === "current" ? "balance" : "current")}
@@ -124,6 +239,12 @@ export default function App() {
 					>
 						เช็คยอดคงเหลือ
 					</div>
+				</div>
+				<div 
+					className="flex text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
+					onClick={generateInvoiceImage}
+				>
+					<FontAwesomeIcon icon={faDownload} /> ยอดคงค้าง
 				</div>
 			</div>
 
