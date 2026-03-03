@@ -232,12 +232,12 @@ export default function App() {
 						เช็คยอดคงเหลือ
 					</div>
 				</div>
-				<Button 
+				<button 
 					className="flex text-sm text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
 					onClick={generateInvoiceImage}
 				>
 					<FontAwesomeIcon icon={faDownload} /> ยอดคงค้าง
-				</Button>
+				</button>
 			</div>
 
 			{/* MODE DISPLAY */}
