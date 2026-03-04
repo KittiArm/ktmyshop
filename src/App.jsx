@@ -58,10 +58,6 @@ export default function App() {
 
 	const hasShown = useRef(false);
 
-	const onClose = e => {
-		console.log(e, 'I was closed.');
-	};
-
 	useEffect(() => {
 		if (!hasShown.current) {
 			let pendingList = [];
@@ -164,101 +160,6 @@ export default function App() {
 			? balanceData
 			: balanceData.filter(item => item.name === selectedPerson);
 
-	const generateInvoiceImage = async () => {
-		let pendingList = [];
-
-		paymentData.forEach((month) => {
-			month.records.forEach((rec) => {
-
-				if (rec.date === "ไม่ระบุ") return;
-
-				const parts = rec.date.split(" ");
-				const day = parts[0];
-				const monthName = parts[1];
-				const buddhistYear = parseInt(parts[2]);
-
-				const christianYear = buddhistYear - 543;
-
-				const formattedDate = `${day} ${monthName} ${christianYear}`;
-				const recordDate = dayjs(formattedDate, "D MMMM YYYY");
-
-				if (
-					rec.status === "รอ" &&
-					recordDate.isValid() &&
-					recordDate.isSameOrBefore(dayjs(), "day")
-				) {
-					pendingList.push({
-						month: month.month,
-						...rec,
-					});
-				}
-			});
-		});
-
-		if (pendingList.length === 0) {
-			notification.warning({
-				message: "ไม่มียอดคงค้าง",
-				description: "ไม่มีรายการที่รอและเลยกำหนด",
-			});
-			return;
-		}
-
-		const totalAmount = pendingList.reduce(
-			(sum, item) => sum + item.amount,
-			0
-		);
-
-		createInvoiceDOM(pendingList, totalAmount);
-	};
-
-
-	const createInvoiceDOM = async (list, total) => {
-		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-		// 🔥 เปิดแท็บทันที (ยังไม่มี await)
-		let newTab = null;
-		if (isIOS) {
-			newTab = window.open("", "_blank");
-		}
-
-		const container = document.createElement("div");
-
-		container.style.width = "528px";
-		container.style.height = "864px";
-		container.style.padding = "40px";
-		container.style.background = "white";
-		container.style.fontFamily = "sans-serif";
-		container.style.boxSizing = "border-box";
-		container.style.position = "fixed";
-		container.style.left = "-9999px";
-		container.style.top = "0";
-
-		container.innerHTML = `...`;
-
-		document.body.appendChild(container);
-
-		const canvas = await html2canvas(container, { scale: 2 });
-		const dataUrl = canvas.toDataURL("image/png");
-
-		if (isIOS && newTab) {
-			newTab.document.write(`
-				<html>
-					<head><title>Invoice</title></head>
-					<body style="margin:0">
-						<img src="${dataUrl}" style="width:100%" />
-					</body>
-				</html>
-			`);
-		} else {
-			const link = document.createElement("a");
-			link.download = "invoice.png";
-			link.href = dataUrl;
-			link.click();
-		}
-
-		document.body.removeChild(container);
-	};
-
 	return (
 		<div className="min-h-screen p-4">
 			<h1 className="text-2xl font-bold text-center">รอรับเงินคืน</h1>
@@ -283,12 +184,6 @@ export default function App() {
 						เช็คยอดคงเหลือ
 					</div>
 				</div>
-				{/* <Button 
-					className="flex text-sm text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
-					onClick={generateInvoiceImage}
-				>
-					<FontAwesomeIcon icon={faDownload} /> ยอดคงค้าง
-				</Button> */}
 			</div>
 
 			{/* MODE DISPLAY */}
