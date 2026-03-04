@@ -6,7 +6,7 @@ import { balanceData } from "./data/balanceData";
 import ProgressBar from "./components/ProgressBar";
 import ProgressTextRatio from "./components/ProgressTextRatio";
 import ProgressText from "./components/ProgressText";
-import { Button, notification } from "antd";
+import { Alert, Button, notification } from "antd";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
@@ -15,9 +15,11 @@ import html2canvas from "html2canvas";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import "dayjs/locale/th";
 
 dayjs.extend(customParseFormat);
+dayjs.extend(isSameOrBefore);
 dayjs.locale("th");
 
 function getStatusColor(status) {
@@ -56,17 +58,66 @@ export default function App() {
 
 	const hasShown = useRef(false);
 
+	const onClose = e => {
+		console.log(e, 'I was closed.');
+	};
+
 	useEffect(() => {
 		if (!hasShown.current) {
-			notification.open({
-				message: "👋 สวัสดี!",
-				description: "ยินดีต้อนรับเข้าสู่ระบบตรวจสอบการคืนเงิน",
-				duration: 5,
-				placement: "bottom",
-			});
-			// <Alert title="Success Text" type="success" />
+			let pendingList = [];
 
-			hasShown.current = true;
+			paymentData.forEach((month) => {
+				month.records.forEach((rec) => {
+
+					if (rec.date === "ไม่ระบุ") return;
+
+					const parts = rec.date.split(" ");
+					const day = parts[0];
+					const monthName = parts[1];
+					const buddhistYear = parseInt(parts[2]);
+
+					const christianYear = buddhistYear - 543;
+
+					const formattedDate = `${day} ${monthName} ${christianYear}`;
+					const recordDate = dayjs(formattedDate, "D MMMM YYYY");
+
+					if (
+						rec.status === "รอ" &&
+						recordDate.isValid() &&
+						recordDate.isSameOrBefore(dayjs(), "day")
+					) {
+						pendingList.push({
+							month: month.month,
+							...rec,
+						});
+					}
+				});
+			});
+
+			const totalAmount = pendingList.reduce(
+				(sum, item) => sum + item.amount,
+				0
+			);
+			
+
+			if (pendingList.length === 0) {
+				notification.success({
+					message: "ไม่มียอดคงค้าง",
+					description: "ไม่มีรายการที่รอและเลยกำหนด",
+					duration: 5,
+					placement: "bottom",
+				});
+				hasShown.current = true;
+				return;
+			} else {
+				notification.error({
+					message: `มียอดคงค้าง ${pendingList.length} รายการ`,
+					description: `ที่รอและเลยกำหนด รวมเป็นเงิน ${totalAmount.toLocaleString()} บาท`,
+					duration: 5,
+					placement: "bottom",
+				});
+				hasShown.current = true;
+			}
 		}
 	}, []);
 
@@ -134,7 +185,7 @@ export default function App() {
 				if (
 					rec.status === "รอ" &&
 					recordDate.isValid() &&
-					recordDate.isBefore(dayjs(), "day")
+					recordDate.isSameOrBefore(dayjs(), "day")
 				) {
 					pendingList.push({
 						month: month.month,
@@ -212,7 +263,7 @@ export default function App() {
 		<div className="min-h-screen p-4">
 			<h1 className="text-2xl font-bold text-center">รอรับเงินคืน</h1>
 
-			<div className="flex justify-between mt-4 mb-2">
+			<div className="flex justify-center mt-4 mb-2">
 				<div
 					className="flex items-center bg-white p-1 rounded-full shadow cursor-pointer select-none"
 					onClick={() => setMode(mode === "current" ? "balance" : "current")}
@@ -232,12 +283,12 @@ export default function App() {
 						เช็คยอดคงเหลือ
 					</div>
 				</div>
-				<Button 
+				{/* <Button 
 					className="flex text-sm text-gray-600 items-center bg-white px-2 py-1 rounded-full shadow cursor-pointer hover:bg-gray-100 focus:outline-none select-none"
 					onClick={generateInvoiceImage}
 				>
 					<FontAwesomeIcon icon={faDownload} /> ยอดคงค้าง
-				</Button>
+				</Button> */}
 			</div>
 
 			{/* MODE DISPLAY */}
